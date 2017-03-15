@@ -1,5 +1,5 @@
 group 'hu.java.eight'
-version '0.0.0'
+version '0.0.1'
 
 apply plugin: 'java'
 
@@ -7,6 +7,14 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
+}
+
+test {
+    useTestNG()
+    testLogging {
+        showStandardStreams = true
+        events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+    }
 }
 
 dependencies {

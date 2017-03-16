@@ -24,4 +24,15 @@ public class StringUtilsTest {
 
         assertTrue(actualOutput.equals(expectedOutput), "Should sort list by length of contained strings");
     }
+
+    @Test
+    public void shouldFilterListOfStrings() {
+        List<String> input = Arrays.asList("Cseresznye", "Alma", "Korte");
+        List<String> expectedOutput = Arrays.asList("Cseresznye");
+        int lowerLengthBound = 5;
+
+        List<String> actualOutput = underTest.filterHigherThan(lowerLengthBound, input);
+
+        assertTrue(actualOutput.equals(expectedOutput), "Should filter elements shorter or long as the bound");
+    }
 }

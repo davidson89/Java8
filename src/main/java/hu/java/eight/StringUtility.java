@@ -20,4 +20,10 @@ public class StringUtility {
                 .filter((String word) -> word.length() > lowerLengthBound)
                 .collect(toList());
     }
+
+    // Sort strings with specific comparator in Java 8
+    public List<String> sortStringsIgnoringCases(List<String> input) {
+        input.sort((String s1, String s2) -> s1.compareToIgnoreCase(s2));
+        return input;
+    }
 }

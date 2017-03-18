@@ -26,6 +26,16 @@ public class StringUtilsTest {
     }
 
     @Test
+    public void shouldSortListOfStringsIgnoringCases() {
+        List<String> input = Arrays.asList("cseresznye", "Alma", "Korte");
+        List<String> expectedOutput = Arrays.asList("Alma", "cseresznye", "Korte");
+
+        List<String> actualOutput = underTest.sortStringsIgnoringCases(input);
+
+        assertTrue(actualOutput.equals(expectedOutput), "Should sort list of strings");
+    }
+
+    @Test
     public void shouldFilterListOfStrings() {
         List<String> input = Arrays.asList("Cseresznye", "Alma", "Korte");
         List<String> expectedOutput = Arrays.asList("Cseresznye");

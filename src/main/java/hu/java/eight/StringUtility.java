@@ -1,5 +1,6 @@
 package hu.java.eight;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
@@ -24,6 +25,12 @@ public class StringUtility {
     // Sort strings with specific comparator in Java 8
     public List<String> sortStringsIgnoringCases(List<String> input) {
         input.sort((String s1, String s2) -> s1.compareToIgnoreCase(s2));
+        return input;
+    }
+
+    // Sort strings with natural comparator in Java 8
+    public List<String> sortStringsWithNaturalComparator(List<String> input) {
+        input.sort(Comparator.naturalOrder());
         return input;
     }
 }

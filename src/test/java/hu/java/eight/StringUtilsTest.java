@@ -32,7 +32,17 @@ public class StringUtilsTest {
 
         List<String> actualOutput = underTest.sortStringsIgnoringCases(input);
 
-        assertTrue(actualOutput.equals(expectedOutput), "Should sort list of strings");
+        assertTrue(actualOutput.equals(expectedOutput), "Should sort list of strings ignoring cases");
+    }
+
+    @Test
+    public void shouldSortListOfStringsUsingNaturalComparator() {
+        List<String> input = Arrays.asList("cseresznye", "Korte", "alma");
+        List<String> expectedOutput = Arrays.asList("Korte", "alma", "cseresznye");
+
+        List<String> actualOutput = underTest.sortStringsWithNaturalComparator(input);
+
+        assertTrue(actualOutput.equals(expectedOutput), "Should sort list of strings by natural order");
     }
 
     @Test

@@ -10,8 +10,8 @@ import static org.testng.Assert.assertEquals;
 public class ThreadSafeCounterTest {
 
     private static final Logger LOGGER = Logger.getLogger( ThreadSafeCounterTest.class.getName() );
-    public static final Level LOG_LEVEL = Level.FINE;
-    public static final String CURRENT_THREAD_ID_MESSAGE_TEMPLATE = "Current thread id: {0}";
+    private static final Level LOG_LEVEL = Level.FINE;
+    private static final String CURRENT_THREAD_ID_MESSAGE_TEMPLATE = "Current thread id: {0}";
 
     private ThreadSafeCounter underTest;
 

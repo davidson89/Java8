@@ -5,7 +5,6 @@ import hu.java.eight.exercise.domain.Transaction;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 

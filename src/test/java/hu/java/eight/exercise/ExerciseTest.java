@@ -4,7 +4,6 @@ import hu.java.eight.exercise.domain.Trader;
 import hu.java.eight.exercise.domain.Transaction;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class ExerciseTest {
 
     @Test
     public void shouldPrintTransactionValuesFromTradersLivingInCambridge() {
-        List<Integer> expectedOutput = Arrays.asList(300, 1000, 400, 950);;
+        List<Integer> expectedOutput = Arrays.asList(300, 1000, 400, 950);
 
         List<Integer> actualOutput = underTest.printTransactionValuesFromTradersLivingInCambridge(transactions);
 

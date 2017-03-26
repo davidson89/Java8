@@ -33,4 +33,11 @@ public class StringUtility {
         input.sort(Comparator.naturalOrder());
         return input;
     }
+
+    // Map-reduce example in Java 8
+    public int sumLengthOfStrings(List<String> input) {
+        return input.stream()
+                .map(i -> i.length())
+                .reduce(0, (x, y) -> x + y);
+    }
 }

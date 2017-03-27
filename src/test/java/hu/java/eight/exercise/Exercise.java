@@ -25,32 +25,44 @@ public class Exercise {
 
     public List<Trader> findTradersByCity(final List<Transaction> transactions, final String city) {
         return transactions.stream()
-                .filter(t -> t.getTrader().getCity().equals(city))
-                .map(transaction -> transaction.getTrader())
+                .filter(t -> city.equals(t.getTrader().getCity()))
+                .map(Transaction::getTrader)
                 .distinct()
                 .sorted(comparing(Trader::getName))
                 .collect(toList());
     }
 
-    public String findAllTraders(List<Transaction> transactions) {
+    public String findAllTraders(final List<Transaction> transactions) {
         return transactions.stream()
-                .map(transaction -> transaction.getTrader())
+                .map(t -> t.getTrader().getName())
                 .distinct()
-                .sorted(comparing(Trader::getName))
-                .map(t -> t.getName())
+                .sorted()
                 .reduce((a, b) -> a + " " + b)
-                .get();
+                .orElse("");
     }
 
-    public boolean tellIfThereAreAnyTradersBasedInMilan(List<Transaction> transactions) {
+    public boolean tellIfThereAreAnyTradersBasedInMilan(final List<Transaction> transactions) {
         return transactions.stream()
-                .anyMatch(t -> t.getTrader().getCity().equals("Milan"));
+                .anyMatch(t -> "Milan".equals(t.getTrader().getCity()));
     }
 
-    public List<Integer> printTransactionValuesFromTradersLivingInCambridge(List<Transaction> transactions) {
+    public List<Integer> printTransactionValuesFromTradersLivingInCambridge(final List<Transaction> transactions) {
         return transactions.stream()
-                .filter(t -> t.getTrader().getCity().equals("Cambridge"))
-                .map(t -> t.getValue())
+                .filter(t -> "Cambridge".equals(t.getTrader().getCity()))
+                .map(Transaction::getValue)
                 .collect(toList());
+    }
+
+    public int findTheHighestValueOfAllTransactions(List<Transaction> transactions) {
+        return transactions.parallelStream()
+                .map(Transaction::getValue)
+                .reduce(Integer::max)
+                .orElse(0);
+    }
+
+    public Transaction findTheTransactionWithTheSmallestValue(List<Transaction> transactions) {
+        return transactions.parallelStream()
+                .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2)
+                .get();
     }
 }

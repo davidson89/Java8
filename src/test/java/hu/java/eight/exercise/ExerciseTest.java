@@ -80,4 +80,22 @@ public class ExerciseTest {
 
         assertEquals(actualOutput, expectedOutput);
     }
+
+    @Test
+    public void shouldFindTheHighestValueOfAllTransactions() {
+        int expectedOutput = 1000;
+
+        int actualOutput = underTest.findTheHighestValueOfAllTransactions(transactions);
+
+        assertEquals(actualOutput, expectedOutput);
+    }
+
+    @Test
+    public void shouldFindTheTransactionWithTheSmallestValue() {
+        Transaction expectedOutput = transactions.get(0);
+
+        Transaction actualOutput = underTest.findTheTransactionWithTheSmallestValue(transactions);
+
+        assertEquals(actualOutput, expectedOutput);
+    }
 }

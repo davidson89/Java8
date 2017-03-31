@@ -1,4 +1,4 @@
-package hu.java.eight.testng;
+package hu.java.eight;
 
 import java.io.IOException;
 import java.net.URI;

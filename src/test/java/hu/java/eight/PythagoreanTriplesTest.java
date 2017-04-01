@@ -25,7 +25,7 @@ public final class PythagoreanTriplesTest {
                 new int[]{8, 15, 17}
         );
 
-        final List<int[]> actualResult = underTest.generatePythagoreanTriples(5);
+        final List<int[]> actualResult = underTest.generatePythagoreanTriples();
 
         assertEquals(actualResult.size(), expectedResult.size());
 

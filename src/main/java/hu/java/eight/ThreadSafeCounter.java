@@ -1,11 +1,11 @@
 package hu.java.eight;
 
-public final class ThreadSafeCounter {
+final class ThreadSafeCounter {
 
     private final Object lock;
     private int count;
 
-    public ThreadSafeCounter() {
+    ThreadSafeCounter() {
         this.lock = new Object();
         this.count = 0;
     }

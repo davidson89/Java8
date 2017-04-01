@@ -3,6 +3,9 @@ version '0.0.1'
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+apply plugin: "jacoco"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 

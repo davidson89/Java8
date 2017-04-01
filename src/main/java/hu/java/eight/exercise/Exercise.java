@@ -4,11 +4,12 @@ import hu.java.eight.exercise.domain.Trader;
 import hu.java.eight.exercise.domain.Transaction;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-public final class Exercise {
+final class Exercise {
     public List<Transaction> findAllTransactions(final List<Transaction> transactions, final int year) {
         return transactions.stream()
                 .filter(t -> t.getYear() == year)
@@ -23,9 +24,9 @@ public final class Exercise {
                 .collect(toList());
     }
 
-    public List<Trader> findTradersByCity(final List<Transaction> transactions, final String city) {
+    public List<Trader> findTradersInCambridge(final List<Transaction> transactions) {
         return transactions.stream()
-                .filter(t -> city.equals(t.getTrader().getCity()))
+                .filter(t -> "Cambridge".equals(t.getTrader().getCity()))
                 .map(Transaction::getTrader)
                 .distinct()
                 .sorted(comparing(Trader::getName))
@@ -60,9 +61,8 @@ public final class Exercise {
                 .orElse(0);
     }
 
-    public Transaction findTheTransactionWithTheSmallestValue(final List<Transaction> transactions) {
+    public Optional<Transaction> findTheTransactionWithTheSmallestValue(final List<Transaction> transactions) {
         return transactions.parallelStream()
-                .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2)
-                .get();
+                .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2);
     }
 }

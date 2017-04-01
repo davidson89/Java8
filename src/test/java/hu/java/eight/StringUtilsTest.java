@@ -2,6 +2,7 @@ package hu.java.eight;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,7 +50,8 @@ public final class StringUtilsTest {
     @Test
     public void shouldFilterListOfStrings() {
         final List<String> input = Arrays.asList("Cseresznye", "Alma", "Korte");
-        final List<String> expectedOutput = Arrays.asList("Cseresznye");
+        final List<String> expectedOutput = new ArrayList<>();
+        expectedOutput.add("Cseresznye");
         final int lowerLengthBound = 5;
 
         final List<String> actualOutput = underTest.filterHigherThan(lowerLengthBound, input);

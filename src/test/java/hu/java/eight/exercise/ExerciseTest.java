@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.testng.Assert.assertEquals;
 
@@ -50,7 +51,7 @@ public final class ExerciseTest {
     public void shouldFindAllTradersFromCambridgeAndSortThemByName() {
         final List<Trader> expectedOutput = Arrays.asList(alan, brian, raoul);
 
-        final List<Trader> actualOutput = underTest.findTradersByCity(transactions, "Cambridge");
+        final List<Trader> actualOutput = underTest.findTradersInCambridge(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -95,8 +96,9 @@ public final class ExerciseTest {
     public void shouldFindTheTransactionWithTheSmallestValue() {
         final Transaction expectedOutput = transactions.get(0);
 
-        final Transaction actualOutput = underTest.findTheTransactionWithTheSmallestValue(transactions);
+        final Optional<Transaction> actualOutput = underTest.findTheTransactionWithTheSmallestValue(transactions);
 
-        assertEquals(actualOutput, expectedOutput);
+        assert actualOutput.isPresent();
+        assertEquals(actualOutput.get(), expectedOutput);
     }
 }

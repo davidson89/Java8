@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public final class PythagoreanTriples {
-    public List<int[]> generatePythagoreanTriples(final int limit) {
+final class PythagoreanTriples {
+    public List<int[]> generatePythagoreanTriples() {
         final List<int[]> result = new ArrayList<>();
         final int startInclusive = 1;
         final int endInclusive = 100;
+        final int limit = 5;
 
         final Stream<int[]> pythagoreanTriples = IntStream.rangeClosed(startInclusive, endInclusive)
                 .boxed()
@@ -20,7 +21,7 @@ public final class PythagoreanTriples {
                 );
 
         pythagoreanTriples.limit(limit)
-                .forEach(triple -> result.add(triple));
+                .forEach(result::add);
 
         return result;
     }

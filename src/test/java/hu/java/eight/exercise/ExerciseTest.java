@@ -9,14 +9,14 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class ExerciseTest {
+public final class ExerciseTest {
 
-    Trader raoul = new Trader("Cambridge", "Raoul");
-    Trader mario = new Trader("Milan", "Mario");
-    Trader alan = new Trader("Cambridge", "Alan");
-    Trader brian = new Trader("Cambridge", "Brian");
+    private final Trader raoul = new Trader("Cambridge", "Raoul");
+    private final Trader mario = new Trader("Milan", "Mario");
+    private final Trader alan = new Trader("Cambridge", "Alan");
+    private final Trader brian = new Trader("Cambridge", "Brian");
 
-    List<Transaction> transactions = Arrays.asList(
+    private final List<Transaction> transactions = Arrays.asList(
             new Transaction(brian, 2011, 300),
             new Transaction(raoul, 2012, 1000),
             new Transaction(raoul, 2011, 400),
@@ -25,76 +25,77 @@ public class ExerciseTest {
             new Transaction(alan, 2012, 950)
     );
 
-    private Exercise underTest = new Exercise();
+    private final Exercise underTest = new Exercise();
 
     @Test
     public void shouldFindAllTransactionsInTheYear2011AndSortThemByValue() {
-        List<Transaction> expectedOutput = Arrays.asList(transactions.get(0), transactions.get(2));
+        final List<Transaction> expectedOutput = Arrays.asList(transactions.get(0), transactions.get(2));
+        final int year = 2011;
 
-        List<Transaction> actualOutput = underTest.findAllTransactions(transactions, 2011);
+        final List<Transaction> actualOutput = underTest.findAllTransactions(transactions, year);
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldFindUniqueCitiesWhereTradersWork() {
-        List<String> expectedOutput = Arrays.asList("Cambridge", "Milan");
+        final List<String> expectedOutput = Arrays.asList("Cambridge", "Milan");
 
-        List<String> actualOutput = underTest.findAllCities(transactions);
+        final List<String> actualOutput = underTest.findAllCities(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldFindAllTradersFromCambridgeAndSortThemByName() {
-        List<Trader> expectedOutput = Arrays.asList(alan, brian, raoul);
+        final List<Trader> expectedOutput = Arrays.asList(alan, brian, raoul);
 
-        List<Trader> actualOutput = underTest.findTradersByCity(transactions, "Cambridge");
+        final List<Trader> actualOutput = underTest.findTradersByCity(transactions, "Cambridge");
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldReturnAListOfTradersNamesSortedAlphabetically() {
-        String expectedOutput = "Alan Brian Mario Raoul";
+        final String expectedOutput = "Alan Brian Mario Raoul";
 
-        String actualOutput = underTest.findAllTraders(transactions);
+        final String actualOutput = underTest.findAllTraders(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldTellIfThereAreAnyTradersBasedInMilan() {
-        boolean expectedOutput = true;
+        final boolean expectedOutput = true;
 
-        boolean actualOutput = underTest.tellIfThereAreAnyTradersBasedInMilan(transactions);
+        final boolean actualOutput = underTest.tellIfThereAreAnyTradersBasedInMilan(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldPrintTransactionValuesFromTradersLivingInCambridge() {
-        List<Integer> expectedOutput = Arrays.asList(300, 1000, 400, 950);
+        final List<Integer> expectedOutput = Arrays.asList(300, 1000, 400, 950);
 
-        List<Integer> actualOutput = underTest.printTransactionValuesFromTradersLivingInCambridge(transactions);
+        final List<Integer> actualOutput = underTest.printTransactionValuesFromTradersLivingInCambridge(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldFindTheHighestValueOfAllTransactions() {
-        int expectedOutput = 1000;
+        final int expectedOutput = 1000;
 
-        int actualOutput = underTest.findTheHighestValueOfAllTransactions(transactions);
+        final int actualOutput = underTest.findTheHighestValueOfAllTransactions(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     public void shouldFindTheTransactionWithTheSmallestValue() {
-        Transaction expectedOutput = transactions.get(0);
+        final Transaction expectedOutput = transactions.get(0);
 
-        Transaction actualOutput = underTest.findTheTransactionWithTheSmallestValue(transactions);
+        final Transaction actualOutput = underTest.findTheTransactionWithTheSmallestValue(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }

@@ -1,7 +1,7 @@
 package hu.java.eight.testng;
 
-public class MagicClass {
-    public int magicFunction(String input) {
+public final class MagicClass {
+    public int magicFunction(final String input) {
         return input.length();
     }
 }

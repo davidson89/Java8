@@ -1,15 +1,14 @@
 package hu.java.eight.exercise.domain;
 
-public class Transaction {
-
+public final class Transaction {
     private final Trader trader;
     private final int year;
     private final int value;
 
-    public Transaction(Trader trader, int year, int value) {
-        this.trader = trader;
-        this.year = year;
-        this.value = value;
+    public Transaction(final Trader traderName, final int yearOfTransaction, final int valueOfTransaction) {
+        this.trader = traderName;
+        this.year = yearOfTransaction;
+        this.value = valueOfTransaction;
     }
 
     public Trader getTrader() {

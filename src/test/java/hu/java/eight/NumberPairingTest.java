@@ -8,9 +8,9 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class NumberPairingTest {
+public final class NumberPairingTest {
 
-    private NumberPairing underTest;
+    private final NumberPairing underTest;
 
     public NumberPairingTest() {
         underTest = new NumberPairing();
@@ -18,10 +18,10 @@ public class NumberPairingTest {
 
     @Test
     public void shouldPairNumbers() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
-        List<Integer> otherNumbers = Arrays.asList(4, 5);
+        final List<Integer> numbers = Arrays.asList(1, 2, 3);
+        final List<Integer> otherNumbers = Arrays.asList(4, 5);
 
-        List<Integer[]> expectedResult = Arrays.asList(
+        final List<Integer[]> expectedResult = Arrays.asList(
                 new Integer[]{1, 4},
                 new Integer[]{1, 5},
                 new Integer[]{2, 4},
@@ -30,7 +30,7 @@ public class NumberPairingTest {
                 new Integer[]{3, 5}
         );
 
-        List<Integer[]> actualResult = underTest.pairNumbers(numbers, otherNumbers);
+        final List<Integer[]> actualResult = underTest.pairNumbers(numbers, otherNumbers);
 
         assertEquals(actualResult.size(), expectedResult.size());
 

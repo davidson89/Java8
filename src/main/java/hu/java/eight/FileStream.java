@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-public class FileStream {
+public final class FileStream {
     private static final Logger LOGGER = Logger.getLogger(FileStream.class.getName());
     private static final String SEPARATOR = " ";
 
-    public long countUniquesWordsFromFile(String fileName) throws URISyntaxException, IOException {
-        URI fileUri = FileStream.class.getResource(fileName).toURI();
+    public long countUniquesWordsFromFile(final String fileName) throws URISyntaxException, IOException {
+        final URI fileUri = FileStream.class.getResource(fileName).toURI();
 
         // try-with-resources statement
         try (Stream<String> lines = Files.lines(Paths.get(fileUri), Charset.defaultCharset())) {

@@ -1,13 +1,13 @@
 package hu.java.eight.exercise.domain;
 
-public class Trader {
+public final class Trader {
 
     private final String city;
     private final String name;
 
-    public Trader(String city, String name) {
-        this.city = city;
-        this.name = name;
+    public Trader(final String cityName, final String traderName) {
+        this.city = cityName;
+        this.name = traderName;
     }
 
     public String getCity() {

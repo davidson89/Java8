@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class PythagoreanTriples {
-    public List<int[]> generatePythagoreanTriples(int limit) {
-        List<int[]> result = new ArrayList<>();
+public final class PythagoreanTriples {
+    public List<int[]> generatePythagoreanTriples(final int limit) {
+        final List<int[]> result = new ArrayList<>();
+        final int startInclusive = 1;
+        final int endInclusive = 100;
 
-        Stream<int[]> pythagoreanTriples = IntStream.rangeClosed(1, 100)
+        final Stream<int[]> pythagoreanTriples = IntStream.rangeClosed(startInclusive, endInclusive)
                 .boxed()
-                .flatMap(a -> IntStream.rangeClosed(a, 100)
+                .flatMap(a -> IntStream.rangeClosed(a, endInclusive)
                         .mapToObj(b -> new double[]{a, b, Math.sqrt(a * a + b * b)})
                         .filter(t -> t[2] % 1.0 == 0)
                         .map(t -> new int[]{(int) t[0], (int) t[1], (int) t[2]})

@@ -7,9 +7,9 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-public class PythagoreanTriplesTest {
+public final class PythagoreanTriplesTest {
 
-    private PythagoreanTriples underTest;
+    private final PythagoreanTriples underTest;
 
     public PythagoreanTriplesTest() {
         this.underTest = new PythagoreanTriples();
@@ -17,7 +17,7 @@ public class PythagoreanTriplesTest {
 
     @Test
     public void shouldGeneratePythagoreanTriples() {
-        List<int[]> expectedResult = Arrays.asList(
+        final List<int[]> expectedResult = Arrays.asList(
                 new int[]{3, 4, 5},
                 new int[]{5, 12, 13},
                 new int[]{6, 8, 10},
@@ -25,7 +25,7 @@ public class PythagoreanTriplesTest {
                 new int[]{8, 15, 17}
         );
 
-        List<int[]> actualResult = underTest.generatePythagoreanTriples(5);
+        final List<int[]> actualResult = underTest.generatePythagoreanTriples(5);
 
         assertEquals(actualResult.size(), expectedResult.size());
 

@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-public class Exercise {
+public final class Exercise {
     public List<Transaction> findAllTransactions(final List<Transaction> transactions, final int year) {
         return transactions.stream()
                 .filter(t -> t.getYear() == year)
@@ -53,14 +53,14 @@ public class Exercise {
                 .collect(toList());
     }
 
-    public int findTheHighestValueOfAllTransactions(List<Transaction> transactions) {
+    public int findTheHighestValueOfAllTransactions(final List<Transaction> transactions) {
         return transactions.parallelStream()
                 .map(Transaction::getValue)
                 .reduce(Integer::max)
                 .orElse(0);
     }
 
-    public Transaction findTheTransactionWithTheSmallestValue(List<Transaction> transactions) {
+    public Transaction findTheTransactionWithTheSmallestValue(final List<Transaction> transactions) {
         return transactions.parallelStream()
                 .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2)
                 .get();

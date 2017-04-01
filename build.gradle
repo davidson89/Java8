@@ -2,6 +2,7 @@ group 'hu.java.eight'
 version '0.0.1'
 
 apply plugin: 'java'
+apply plugin: 'checkstyle'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 

@@ -4,9 +4,9 @@ import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-public class TestNGTemplateTest {
+public final class TestNGTemplateTest {
 
-    private MagicClass underTest;
+    private final MagicClass underTest;
 
     public TestNGTemplateTest() {
         underTest = new MagicClass();
@@ -14,10 +14,11 @@ public class TestNGTemplateTest {
 
     @Test
     public void testMagicFunctionality() {
-        String magicString = "Magic!";
+        final String magicString = "Magic!";
+        final int expectedLength = 6;
 
-        int output = underTest.magicFunction(magicString);
+        final int actualLength = underTest.magicFunction(magicString);
 
-        assertEquals("Magic test", 6, output);
+        assertEquals("Magic test", expectedLength, actualLength);
     }
 }

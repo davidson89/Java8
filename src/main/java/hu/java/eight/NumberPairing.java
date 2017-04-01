@@ -4,8 +4,8 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class NumberPairing extends StringUtility {
-    public List<Integer[]> pairNumbers(List<Integer> numbers, List<Integer> otherNumbers) {
+public final class NumberPairing {
+    public List<Integer[]> pairNumbers(final List<Integer> numbers, final List<Integer> otherNumbers) {
         return numbers.stream()
                 .flatMap(i -> otherNumbers.stream()
                         .map(j -> new Integer[]{i, j}))

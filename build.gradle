@@ -5,7 +5,7 @@ apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
-apply plugin: "jacoco"
+apply plugin: 'jacoco'
 
 apply from: rootProject.file('gradle/install-git-hooks.gradle')
 

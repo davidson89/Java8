@@ -7,6 +7,8 @@ apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: "jacoco"
 
+apply from: rootProject.file('gradle/install-git-hooks.gradle')
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {

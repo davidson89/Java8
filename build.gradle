@@ -25,6 +25,8 @@ test {
     }
 }
 
+build.dependsOn jacocoTestReport
+
 dependencies {
     testCompile 'org.testng:testng:6.11'
 }

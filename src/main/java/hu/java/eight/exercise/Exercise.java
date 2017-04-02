@@ -4,9 +4,11 @@ import hu.java.eight.exercise.domain.Trader;
 import hu.java.eight.exercise.domain.Transaction;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 final class Exercise {
@@ -64,5 +66,10 @@ final class Exercise {
     public Optional<Transaction> findTheTransactionWithTheSmallestValue(final List<Transaction> transactions) {
         return transactions.parallelStream()
                 .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2);
+    }
+
+    public Map<Integer, Map<String, List<Transaction>>> groupByYearAndTrader(final List<Transaction> transactions) {
+        return transactions.stream()
+                .collect(groupingBy(Transaction::getYear, groupingBy(t -> t.getTrader().getName())));
     }
 }

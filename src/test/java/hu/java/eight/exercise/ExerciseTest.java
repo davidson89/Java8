@@ -5,9 +5,12 @@ import hu.java.eight.exercise.domain.Transaction;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import static java.util.Collections.singletonList;
 import static org.testng.Assert.assertEquals;
 
 public final class ExerciseTest {
@@ -100,5 +103,36 @@ public final class ExerciseTest {
 
         assert actualOutput.isPresent();
         assertEquals(actualOutput.get(), expectedOutput);
+    }
+
+    @Test
+    public void shouldGroupTransactionsByYearAndByTrader() {
+        final Map<Integer, Map<String, List<Transaction>>> expectedOutput = new HashMap<>();
+        final Map<String, List<Transaction>> transactionsOf2011 = new HashMap<>();
+        final Map<String, List<Transaction>> transactionsOf2012 = new HashMap<>();
+
+        final int year2011 = 2011;
+        final int year2012 = 2012;
+        final int tr0 = 0;
+        final int tr1 = 1;
+        final int tr2 = 2;
+        final int tr3 = 3;
+        final int tr4 = 4;
+        final int tr5 = 5;
+
+        transactionsOf2011.put("Brian", singletonList(transactions.get(tr0)));
+        transactionsOf2011.put("Raoul", singletonList(transactions.get(tr2)));
+
+        transactionsOf2012.put("Raoul", singletonList(transactions.get(tr1)));
+        transactionsOf2012.put("Mario", Arrays.asList(transactions.get(tr3), transactions.get(tr4)));
+        transactionsOf2012.put("Alan", singletonList(transactions.get(tr5)));
+
+        expectedOutput.put(year2011, transactionsOf2011);
+        expectedOutput.put(year2012, transactionsOf2012);
+
+        final Map<Integer, Map<String, List<Transaction>>> actualOutput = underTest
+                .groupByYearAndTrader(transactions);
+
+        assertEquals(actualOutput, expectedOutput);
     }
 }

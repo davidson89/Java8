@@ -2,6 +2,8 @@ package hu.java.eight;
 
 import org.testng.annotations.Test;
 
+import java.text.MessageFormat;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,12 +23,15 @@ public final class ThreadSafeCounterTest {
 
     @Test
     public void shouldExecuteThreadSafeOperation() throws InterruptedException {
-        LOGGER.log(LOG_LEVEL, CURRENT_THREAD_ID_MESSAGE_TEMPLATE, Thread.currentThread().getId());
+        final Supplier<String> msgSupplier = () ->
+                MessageFormat.format(CURRENT_THREAD_ID_MESSAGE_TEMPLATE, Thread.currentThread().getId());
+
+        LOGGER.log(LOG_LEVEL, msgSupplier);
 
         underTest.increment();
 
         final Thread t = new Thread(() -> {
-            LOGGER.log(LOG_LEVEL, CURRENT_THREAD_ID_MESSAGE_TEMPLATE, Thread.currentThread().getId());
+            LOGGER.log(LOG_LEVEL, msgSupplier);
             underTest.increment();
         });
 

@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -19,9 +20,11 @@ final class FileStream {
     public long countUniquesWordsFromFile(final String fileName) throws URISyntaxException, IOException {
         final URL url = FileStream.class.getResource(fileName);
 
+        final Supplier<String> msgSupplier = () -> MessageFormat.format("Could not find file: {0}", fileName);
+
         if (url == null) {
-            LOGGER.severe(MessageFormat.format("Could not find file: {0}", fileName));
-            throw new IOException(MessageFormat.format("Could not find file: {0}", fileName));
+            LOGGER.severe(msgSupplier);
+            throw new IOException(msgSupplier.get());
         }
 
         final URI fileUri = url.toURI();

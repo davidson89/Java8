@@ -28,14 +28,18 @@ public final class Shop {
     public Future<Double> getPriceAsync(final String product) {
         CompletableFuture<Double> futurePrice = new CompletableFuture<>();
         new Thread(() -> {
-            double price = calculatePrice(product);
-            futurePrice.complete(price);
+            try {
+                double price = calculatePrice(product);
+                futurePrice.complete(price);
+            } catch (Exception e) {
+                futurePrice.completeExceptionally(e);
+            }
         }).start();
         return futurePrice;
     }
 
     private double calculatePrice(final String product) {
         delay();
-        return random.nextDouble() * product.charAt(0) + product.charAt(1);
+        return Math.random() * product.charAt(0) + product.charAt(1);
     }
 }

@@ -26,16 +26,7 @@ public final class Shop {
     }
 
     public Future<Double> getPriceAsync(final String product) {
-        CompletableFuture<Double> futurePrice = new CompletableFuture<>();
-        new Thread(() -> {
-            try {
-                double price = calculatePrice(product);
-                futurePrice.complete(price);
-            } catch (Exception e) {
-                futurePrice.completeExceptionally(e);
-            }
-        }).start();
-        return futurePrice;
+        return CompletableFuture.supplyAsync(() -> calculatePrice(product));
     }
 
     private double calculatePrice(final String product) {

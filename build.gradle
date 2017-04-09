@@ -17,13 +17,20 @@ repositories {
 
 test {
     useTestNG {
-        parallel = 'methods'
+        parallel = 'classes'
         threadCount = 4
     }
 
     testLogging {
         showStandardStreams = true
         events 'passed', 'skipped', 'failed'
+    }
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
     }
 }
 

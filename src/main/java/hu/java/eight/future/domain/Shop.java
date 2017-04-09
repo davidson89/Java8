@@ -1,17 +1,14 @@
 package hu.java.eight.future.domain;
 
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
-import java.util.concurrent.ThreadLocalRandom;
 
 public final class Shop {
     private static final long DELAY = 1000L;
 
-    private final Random random;
     private final String name;
 
-    public static void delay() {
+    private static void delay() {
         try {
             Thread.sleep(DELAY);
         } catch (InterruptedException e) {
@@ -20,7 +17,6 @@ public final class Shop {
     }
 
     public Shop(final String shopName) {
-        this.random = ThreadLocalRandom.current();
         this.name = shopName;
     }
 

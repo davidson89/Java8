@@ -2,49 +2,56 @@ package hu.java.eight.future;
 
 import hu.java.eight.future.domain.Shop;
 
-import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static java.util.stream.Collectors.toList;
 
 final class Client {
     private final List<Shop> shops;
+    private final Executor executor;
 
     Client() {
         this.shops = Arrays.asList(new Shop("BestPrice"),
                 new Shop("LetsSaveBig"),
                 new Shop("MyFavouriteShop"),
+                new Shop("BiShop"),
                 new Shop("BuyItAll"));
+        this.executor = createExecutor(this.shops.size());
     }
 
-    public void magic() {
-        final long start = System.nanoTime();
+    private Executor createExecutor(final int collectionSize) {
+        final double cpuCores = Runtime.getRuntime().availableProcessors();
+        final double targetCpuUtilization = 1.0; // between 0 and 1
+        final double waitTimeToComputeTimeRatio = 24.0; // 4% computation
+        final double numberOfThreads = cpuCores * targetCpuUtilization * (1 + waitTimeToComputeTimeRatio);
+        return Executors.newFixedThreadPool(Math.min(collectionSize, (int) numberOfThreads), r -> {
+            final Thread t = new Thread(r);
+            t.setDaemon(true);
+            return t;
+        });
+    }
 
-        Future<Double> futurePrice = shops.get(0).getPriceAsync("My favorite product");
-
-        final int million = 1_000_000;
-        final long invocationTime = ((System.nanoTime() - start) / million);
-        System.out.println(MessageFormat.format("Invocation returned after {0} ms", invocationTime));
+    public Future<Double> getPriceFromFirstShop(final String product) {
+        final Future<Double> futurePrice = shops.get(0).getPriceAsync(product);
 
         doSomethingElse();
 
-        try {
-            double price = futurePrice.get();
-            System.out.println(MessageFormat.format("Price is: {0}", price));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        final long retrievalTime = ((System.nanoTime() - start) / million);
-
-        System.out.println(MessageFormat.format("Price returned after {0} ms", retrievalTime));
+        return futurePrice;
     }
 
     public List<String> findPrices(final String product) {
-        return shops.stream()
-                .map(shop -> String.format("%s price is %.2f", shop.getName(), shop.getPrice(product)))
+        List<CompletableFuture<String>> priceFutures = shops.stream()
+                .map(shop -> CompletableFuture.supplyAsync(() ->
+                        String.format("%s price is %.2f", shop.getName(), shop.getPrice(product)), executor
+                ))
+                .collect(toList());
+        return priceFutures.stream()
+                .map(CompletableFuture::join)
                 .collect(toList());
     }
 

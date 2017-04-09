@@ -7,11 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public final class Shop {
     private static final long DELAY = 1000L;
-    private final Random random;
 
-    public Shop() {
-        this.random = ThreadLocalRandom.current();
-    }
+    private final Random random;
+    private final String name;
 
     public static void delay() {
         try {
@@ -21,12 +19,21 @@ public final class Shop {
         }
     }
 
-    public double getPrice(final String product) {
-        return calculatePrice(product);
+    public Shop(final String shopName) {
+        this.random = ThreadLocalRandom.current();
+        this.name = shopName;
     }
 
     public Future<Double> getPriceAsync(final String product) {
         return CompletableFuture.supplyAsync(() -> calculatePrice(product));
+    }
+
+    public double getPrice(final String product) {
+        return calculatePrice(product);
+    }
+
+    public String getName() {
+        return name;
     }
 
     private double calculatePrice(final String product) {

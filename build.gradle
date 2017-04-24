@@ -1,5 +1,9 @@
+plugins {
+    id "org.sonarqube" version "2.3"
+}
+
 group 'hu.java.eight'
-version '0.0.2'
+version '0.1.0'
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'

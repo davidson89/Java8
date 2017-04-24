@@ -6,16 +6,12 @@ import hu.java.eight.optional.domain.Person;
 import org.testng.annotations.Test;
 
 public final class OptionalsTest {
-    private final Person alex;
-
-    public OptionalsTest() {
-        final Insurance insurance = new Insurance();
-        final Car car = new Car(insurance);
-        this.alex = new Person(car);
-    }
-
     @Test
     public void shouldGetNameOfInsurance() {
+        final Insurance insurance = new Insurance();
+        final Car car = new Car(insurance);
+        final Person alex = new Person(car);
+
         assert "Tony Hoare".equals(alex.getCar()
                 .flatMap(Car::getInsurance)
                 .map(Insurance::getName)
@@ -25,7 +21,8 @@ public final class OptionalsTest {
 
     @Test
     public void shouldNotGetNameOfNonExistentInsurance() {
-        alex.getCar().ifPresent(Car::setInsuranceToNull);
+        final Car car = new Car();
+        final Person alex = new Person(car);
 
         assert "Unknown".equals(alex.getCar()
                 .flatMap(Car::getInsurance)
@@ -36,7 +33,7 @@ public final class OptionalsTest {
 
     @Test
     public void shouldNotGetNameOfInsuranceWithNonExistentCar() {
-        alex.setCarToNull();
+        final Person alex = new Person();
 
         assert "Unknown".equals(alex.getCar()
                 .flatMap(Car::getInsurance)

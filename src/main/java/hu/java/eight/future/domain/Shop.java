@@ -2,22 +2,25 @@ package hu.java.eight.future.domain;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
+import java.util.logging.Logger;
 
 public final class Shop {
     private static final long DELAY = 1000L;
+    private static final Logger LOGGER = Logger.getLogger(Shop.class.getName());
 
     private final String name;
+
+    public Shop(final String shopName) {
+        this.name = shopName;
+    }
 
     private static void delay() {
         try {
             Thread.sleep(DELAY);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            LOGGER.warning(e.getMessage());
+            Thread.currentThread().interrupt();
         }
-    }
-
-    public Shop(final String shopName) {
-        this.name = shopName;
     }
 
     public Future<Double> getPriceAsync(final String product) {

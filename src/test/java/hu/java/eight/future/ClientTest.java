@@ -1,5 +1,6 @@
 package hu.java.eight.future;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,19 +9,18 @@ import java.util.concurrent.Future;
 
 public final class ClientTest {
     private static final int MILLION = 1_000_000;
+    private Client underTest;
 
     @DataProvider(name = "products")
     public Object[][] createProducts() {
-        return new Object[][] {
+        return new Object[][]{
                 {"MyPhone27s"},
                 {"My favorite product"},
         };
     }
 
-
-    private final Client underTest;
-
-    public ClientTest() {
+    @BeforeMethod
+    public void setUp() {
         this.underTest = new Client();
     }
 
@@ -40,7 +40,7 @@ public final class ClientTest {
         System.out.println("Get price from the first shop");
         final long start = System.nanoTime();
 
-        Future<Double> futurePrice = underTest.getPriceFromFirstShop(product);
+        final Future<Double> futurePrice = this.underTest.getPriceFromFirstShop(product);
 
         final long invocationTime = ((System.nanoTime() - start) / MILLION);
         System.out.println(MessageFormat.format("Invocation returned after {0} ms", invocationTime));

@@ -1,4 +1,4 @@
-package hu.java.eight;
+package hu.java.eight.streams;
 
 import java.util.List;
 

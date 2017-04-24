@@ -1,5 +1,6 @@
-package hu.java.eight;
+package hu.java.eight.streams;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -8,10 +9,10 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 public final class PythagoreanTriplesTest {
+    private PythagoreanTriples underTest;
 
-    private final PythagoreanTriples underTest;
-
-    public PythagoreanTriplesTest() {
+    @BeforeMethod
+    public void setUp() {
         this.underTest = new PythagoreanTriples();
     }
 
@@ -25,7 +26,7 @@ public final class PythagoreanTriplesTest {
                 new int[]{8, 15, 17}
         );
 
-        final List<int[]> actualResult = underTest.generatePythagoreanTriples();
+        final List<int[]> actualResult = this.underTest.generatePythagoreanTriples();
 
         assertEquals(actualResult.size(), expectedResult.size());
 

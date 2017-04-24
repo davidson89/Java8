@@ -2,8 +2,10 @@ package hu.java.eight.exercise;
 
 import hu.java.eight.exercise.domain.Trader;
 import hu.java.eight.exercise.domain.Transaction;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -14,29 +16,38 @@ import static java.util.Collections.singletonList;
 import static org.testng.Assert.assertEquals;
 
 public final class ExerciseTest {
+    private Trader raoul;
+    private Trader alan;
+    private Trader brian;
+    private List<Transaction> transactions;
+    private Exercise underTest;
 
-    private final Trader raoul = new Trader("Cambridge", "Raoul");
-    private final Trader mario = new Trader("Milan", "Mario");
-    private final Trader alan = new Trader("Cambridge", "Alan");
-    private final Trader brian = new Trader("Cambridge", "Brian");
+    @BeforeMethod
+    public void setUp() {
+        raoul = new Trader("Cambridge", "Raoul");
+        final Trader mario = new Trader("Milan", "Mario");
+        alan = new Trader("Cambridge", "Alan");
+        brian = new Trader("Cambridge", "Brian");
 
-    private final List<Transaction> transactions = Arrays.asList(
-            new Transaction(brian, 2011, 300),
-            new Transaction(raoul, 2012, 1000),
-            new Transaction(raoul, 2011, 400),
-            new Transaction(mario, 2012, 710),
-            new Transaction(mario, 2012, 700),
-            new Transaction(alan, 2012, 950)
-    );
+        final List<Transaction> listOfTransactions = Arrays.asList(
+                new Transaction(brian, 2011, 300),
+                new Transaction(raoul, 2012, 1000),
+                new Transaction(raoul, 2011, 400),
+                new Transaction(mario, 2012, 710),
+                new Transaction(mario, 2012, 700),
+                new Transaction(alan, 2012, 950)
+        );
 
-    private final Exercise underTest = new Exercise();
+        this.transactions = new ArrayList<>(listOfTransactions);
+        this.underTest = new Exercise();
+    }
 
     @Test
     public void shouldFindAllTransactionsInTheYear2011AndSortThemByValue() {
         final List<Transaction> expectedOutput = Arrays.asList(transactions.get(0), transactions.get(2));
         final int year = 2011;
 
-        final List<Transaction> actualOutput = underTest.findAllTransactions(transactions, year);
+        final List<Transaction> actualOutput = this.underTest.findAllTransactions(transactions, year);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -45,7 +56,7 @@ public final class ExerciseTest {
     public void shouldFindUniqueCitiesWhereTradersWork() {
         final List<String> expectedOutput = Arrays.asList("Cambridge", "Milan");
 
-        final List<String> actualOutput = underTest.findAllCities(transactions);
+        final List<String> actualOutput = this.underTest.findAllCities(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -54,7 +65,7 @@ public final class ExerciseTest {
     public void shouldFindAllTradersFromCambridgeAndSortThemByName() {
         final List<Trader> expectedOutput = Arrays.asList(alan, brian, raoul);
 
-        final List<Trader> actualOutput = underTest.findTradersInCambridge(transactions);
+        final List<Trader> actualOutput = this.underTest.findTradersInCambridge(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -63,7 +74,7 @@ public final class ExerciseTest {
     public void shouldReturnAListOfTradersNamesSortedAlphabetically() {
         final String expectedOutput = "Alan Brian Mario Raoul";
 
-        final String actualOutput = underTest.findAllTraders(transactions);
+        final String actualOutput = this.underTest.findAllTraders(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -72,7 +83,7 @@ public final class ExerciseTest {
     public void shouldTellIfThereAreAnyTradersBasedInMilan() {
         final boolean expectedOutput = true;
 
-        final boolean actualOutput = underTest.tellIfThereAreAnyTradersBasedInMilan(transactions);
+        final boolean actualOutput = this.underTest.tellIfThereAreAnyTradersBasedInMilan(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -81,7 +92,7 @@ public final class ExerciseTest {
     public void shouldPrintTransactionValuesFromTradersLivingInCambridge() {
         final List<Integer> expectedOutput = Arrays.asList(300, 1000, 400, 950);
 
-        final List<Integer> actualOutput = underTest.printTransactionValuesFromTradersLivingInCambridge(transactions);
+        final List<Integer> actualOutput = this.underTest.printTransactionValuesFromTradersLivingInCambridge(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -90,7 +101,7 @@ public final class ExerciseTest {
     public void shouldFindTheHighestValueOfAllTransactions() {
         final int expectedOutput = 1000;
 
-        final int actualOutput = underTest.findTheHighestValueOfAllTransactions(transactions);
+        final int actualOutput = this.underTest.findTheHighestValueOfAllTransactions(transactions);
 
         assertEquals(actualOutput, expectedOutput);
     }
@@ -99,7 +110,7 @@ public final class ExerciseTest {
     public void shouldFindTheTransactionWithTheSmallestValue() {
         final Transaction expectedOutput = transactions.get(0);
 
-        final Optional<Transaction> actualOutput = underTest.findTheTransactionWithTheSmallestValue(transactions);
+        final Optional<Transaction> actualOutput = this.underTest.findTheTransactionWithTheSmallestValue(transactions);
 
         assert actualOutput.isPresent();
         assertEquals(actualOutput.get(), expectedOutput);
@@ -130,7 +141,7 @@ public final class ExerciseTest {
         expectedOutput.put(year2011, transactionsOf2011);
         expectedOutput.put(year2012, transactionsOf2012);
 
-        final Map<Integer, Map<String, List<Transaction>>> actualOutput = underTest
+        final Map<Integer, Map<String, List<Transaction>>> actualOutput = this.underTest
                 .groupByYearAndTrader(transactions);
 
         assertEquals(actualOutput, expectedOutput);

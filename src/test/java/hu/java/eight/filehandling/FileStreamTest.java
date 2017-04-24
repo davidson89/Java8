@@ -1,35 +1,35 @@
-package hu.java.eight;
+package hu.java.eight.filehandling;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static org.testng.Assert.assertEquals;
 
 public final class FileStreamTest {
-
     private static final String FILE_NAME = "/data.txt";
     private static final String NON_EXISTENT_FILE_NAME = "/some_data.txt";
 
-    private final FileStream underTest;
+    private FileStream underTest;
 
-    public FileStreamTest() {
+    @BeforeMethod
+    public void setUp() {
         this.underTest = new FileStream();
     }
 
     @Test
-    public void shouldCountUniqueWordsFromFile() throws IOException, URISyntaxException {
+    public void shouldCountUniqueWordsFromFile() throws Exception {
         final long expectedResult = 3L;
-        final long actualResult = underTest.countUniquesWordsFromFile(FILE_NAME);
+        final long actualResult = this.underTest.countUniqueWordsFromFile(FILE_NAME);
 
         assertEquals(actualResult, expectedResult);
     }
 
     @Test(expectedExceptions = IOException.class)
-    public void shouldFailReadingNonExistentFile() throws IOException, URISyntaxException {
+    public void shouldFailReadingNonExistentFile() throws Exception {
         final long expectedResult = 3L;
-        final long actualResult = underTest.countUniquesWordsFromFile(NON_EXISTENT_FILE_NAME);
+        final long actualResult = this.underTest.countUniqueWordsFromFile(NON_EXISTENT_FILE_NAME);
 
         assertEquals(actualResult, expectedResult);
     }

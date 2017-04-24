@@ -1,5 +1,6 @@
-package hu.java.eight;
+package hu.java.eight.streams;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -9,11 +10,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public final class NumberPairingTest {
+    private NumberPairing underTest;
 
-    private final NumberPairing underTest;
-
-    public NumberPairingTest() {
-        underTest = new NumberPairing();
+    @BeforeMethod
+    public void setUp() {
+        this.underTest = new NumberPairing();
     }
 
     @Test
@@ -30,7 +31,7 @@ public final class NumberPairingTest {
                 new Integer[]{3, 5}
         );
 
-        final List<Integer[]> actualResult = underTest.pairNumbers(numbers, otherNumbers);
+        final List<Integer[]> actualResult = this.underTest.pairNumbers(numbers, otherNumbers);
 
         assertEquals(actualResult.size(), expectedResult.size());
 

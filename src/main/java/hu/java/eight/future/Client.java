@@ -8,10 +8,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.logging.Logger;
 
 import static java.util.stream.Collectors.toList;
 
 final class Client {
+    private static final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private final List<Shop> shops;
     private final Executor executor;
 
@@ -56,6 +58,6 @@ final class Client {
     }
 
     private void doSomethingElse() {
-        System.out.println("Do something else...");
+        LOGGER.info("Do something else...");
     }
 }

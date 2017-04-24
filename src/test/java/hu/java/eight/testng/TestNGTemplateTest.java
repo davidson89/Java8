@@ -1,23 +1,32 @@
 package hu.java.eight.testng;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
 
 public final class TestNGTemplateTest {
+    private MagicClass underTest;
 
-    private final MagicClass underTest;
-
-    public TestNGTemplateTest() {
-        underTest = new MagicClass();
+    @DataProvider(name = "strings")
+    public Object[][] createStrings() {
+        final String magic = "Magic!";
+        final String description = "My favorite product";
+        return new Object[][] {
+                {magic, magic.length()},
+                {description, description.length()},
+        };
     }
 
-    @Test
-    public void testMagicFunctionality() {
-        final String magicString = "Magic!";
-        final int expectedLength = 6;
+    @BeforeMethod
+    public void setUp() {
+        this.underTest = new MagicClass();
+    }
 
-        final int actualLength = underTest.magicFunction(magicString);
+    @Test(dataProvider = "strings")
+    public void testMagicFunctionality(final String magicString, final int expectedLength) {
+        final int actualLength = this.underTest.magicFunction(magicString);
 
         assertEquals("Magic test", expectedLength, actualLength);
     }

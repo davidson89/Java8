@@ -1,5 +1,6 @@
-package hu.java.eight;
+package hu.java.eight.streams;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -10,11 +11,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public final class StringUtilsTest {
+    private StringUtility underTest;
 
-    private final StringUtility underTest;
-
-    public StringUtilsTest() {
-        underTest = new StringUtility();
+    @BeforeMethod
+    public void setUp() {
+        this.underTest = new StringUtility();
     }
 
     @Test
@@ -22,7 +23,7 @@ public final class StringUtilsTest {
         final List<String> input = Arrays.asList("Cseresznye", "Alma", "Korte");
         final List<String> expectedOutput = Arrays.asList("Alma", "Korte", "Cseresznye");
 
-        final List<String> actualOutput = underTest.sortStringsByLength(input);
+        final List<String> actualOutput = this.underTest.sortStringsByLength(input);
 
         assertTrue(actualOutput.equals(expectedOutput), "Should sort list by length of contained strings");
     }
@@ -32,7 +33,7 @@ public final class StringUtilsTest {
         final List<String> input = Arrays.asList("cseresznye", "Alma", "Korte");
         final List<String> expectedOutput = Arrays.asList("Alma", "cseresznye", "Korte");
 
-        final List<String> actualOutput = underTest.sortStringsIgnoringCases(input);
+        final List<String> actualOutput = this.underTest.sortStringsIgnoringCases(input);
 
         assertTrue(actualOutput.equals(expectedOutput), "Should sort list of strings ignoring cases");
     }
@@ -42,7 +43,7 @@ public final class StringUtilsTest {
         final List<String> input = Arrays.asList("cseresznye", "Korte", "alma");
         final List<String> expectedOutput = Arrays.asList("Korte", "alma", "cseresznye");
 
-        final List<String> actualOutput = underTest.sortStringsWithNaturalComparator(input);
+        final List<String> actualOutput = this.underTest.sortStringsWithNaturalComparator(input);
 
         assertTrue(actualOutput.equals(expectedOutput), "Should sort list of strings by natural order");
     }
@@ -54,7 +55,7 @@ public final class StringUtilsTest {
         expectedOutput.add("Cseresznye");
         final int lowerLengthBound = 5;
 
-        final List<String> actualOutput = underTest.filterHigherThan(lowerLengthBound, input);
+        final List<String> actualOutput = this.underTest.filterHigherThan(lowerLengthBound, input);
 
         assertTrue(actualOutput.equals(expectedOutput), "Should filter elements shorter or long as the bound");
     }
@@ -64,7 +65,7 @@ public final class StringUtilsTest {
         final List<String> input = Arrays.asList("Cseresznye", "Alma", "Korte");
         final int expectedOutput = 19;
 
-        final int actualOutput = underTest.sumLengthOfStrings(input);
+        final int actualOutput = this.underTest.sumLengthOfStrings(input);
 
         assertEquals(actualOutput, expectedOutput, "Should filter elements shorter or long as the bound");
     }

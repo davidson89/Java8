@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'hu.java.eight'
-version '0.1.0'
+version '0.1.1'
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
@@ -12,6 +12,7 @@ apply plugin: 'pmd'
 apply plugin: 'jacoco'
 
 apply from: rootProject.file('gradle/install-git-hooks.gradle')
+apply from: rootProject.file('gradle/increment-version.gradle')
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
